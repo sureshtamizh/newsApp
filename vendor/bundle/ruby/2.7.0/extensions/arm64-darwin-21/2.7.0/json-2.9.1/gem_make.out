@@ -1,0 +1,22 @@
+current directory: /Users/suresh/Documents/React&Node/React_Native/newsApp/newsapp/vendor/bundle/ruby/2.7.0/gems/json-2.9.1/ext/json/ext/parser
+/opt/homebrew/opt/ruby@2.7/bin/ruby -I /opt/homebrew/Cellar/ruby@2.7/2.7.6/lib/ruby/2.7.0 -r ./siteconf20250201-37649-12l63b9.rb extconf.rb
+checking for rb_enc_interned_str() in ruby.h... no
+checking for rb_hash_new_capa() in ruby.h... no
+checking for rb_hash_bulk_insert() in ruby.h... yes
+checking for rb_category_warn() in ruby.h... no
+checking for strnlen() in string.h... yes
+checking for whether -std=c99 is accepted as CFLAGS... yes
+creating Makefile
+
+current directory: /Users/suresh/Documents/React&Node/React_Native/newsApp/newsapp/vendor/bundle/ruby/2.7.0/gems/json-2.9.1/ext/json/ext/parser
+make DESTDIR\= clean
+
+current directory: /Users/suresh/Documents/React&Node/React_Native/newsApp/newsapp/vendor/bundle/ruby/2.7.0/gems/json-2.9.1/ext/json/ext/parser
+make DESTDIR\=
+compiling parser.c
+linking shared-object json/ext/parser.bundle
+ld: warning: -multiply_defined is obsolete
+
+current directory: /Users/suresh/Documents/React&Node/React_Native/newsApp/newsapp/vendor/bundle/ruby/2.7.0/gems/json-2.9.1/ext/json/ext/parser
+make DESTDIR\= install
+/usr/bin/install -c -m 0755 parser.bundle ./.gem.20250201-37649-354ddo/json/ext
