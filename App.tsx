@@ -5,113 +5,92 @@
  * @format
  */
 
-import React from 'react';
-import type {PropsWithChildren} from 'react';
+import React, { useState } from 'react';
 import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
+  Linking,
   StyleSheet,
   Text,
-  useColorScheme,
+  TextInput,
+  TouchableOpacity,
   View,
 } from 'react-native';
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
-
-type SectionProps = PropsWithChildren<{
-  title: string;
-}>;
-
-function Section({children, title}: SectionProps): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
+const WelcomeScreen = () => {
   return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
+    <View style={styles.view}>
+      <Text style={styles.welcomeText}>
+        Welcome to{' '}
+        <Text
+          style={{ color: 'rgb(171, 91, 85)', textDecorationLine: 'underline' }}
+          onPress={() => Linking.openURL('https://code-b.dev')}>
+          CODEB
+        </Text>
       </Text>
     </View>
   );
-}
+};
+
+const LoginScreen = (): React.JSX.Element => {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [message, setMessage] = useState('');
+  const handleSubmitPress = () => {
+    if (username === '' || password === '') {
+      setMessage('Please provide all values');
+    } else {
+      if (username === 'codeb@gmail.com' && password === 'Password@1234') {
+        setMessage('SUCCESS');
+      } else {
+        setMessage('INCORRECT CREDENTIAL');
+      }
+    }
+  };
+  return (
+    <View>
+      <TextInput
+        placeholder="Enter username"
+        autoCapitalize="none"
+        id="username"
+        keyboardType="email-address"
+        onChangeText={setUsername}
+      />
+      <TextInput
+        id="password"
+        placeholder="Enter Password"
+        autoCapitalize="none"
+        keyboardType="default"
+        onChangeText={setPassword}
+      />
+      <TouchableOpacity activeOpacity={0.5} onPress={handleSubmitPress}>
+        <Text>LOGIN</Text>
+      </TouchableOpacity>
+      {message === 'SUCCESS' ? (
+        <Text>
+          <WelcomeScreen />{' '}
+        </Text>
+      ) : (
+        <View>
+          <Text>{message}</Text>
+        </View>
+      )}
+    </View>
+  );
+};
 
 function App(): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
-
-  return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
-      />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.tsx</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
-        </View>
-      </ScrollView>
-    </SafeAreaView>
-  );
+  return <LoginScreen />;
 }
 
 const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
+  view: {
+    flex: 1,
+    width: 'auto',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
+  welcomeText: {
+    fontSize: 28,
   },
 });
 
